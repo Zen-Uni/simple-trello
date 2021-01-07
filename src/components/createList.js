@@ -1,4 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { connect } from 'react-redux';
+
+// inject actions
+import {
+    addList,
+} from '../store/action'
 
 import {
     CreateListBox,
@@ -7,9 +13,13 @@ import {
     CreateListButtonBox,
     CreateListButton,
     CreateListCancle,
+    ListBox,
 } from '../style/index';
 
-function CreateList() {
+function CreateList(props) {
+
+    const { handleAddList, list } = props;
+    console.log(list);
 
     const [createClick, setCreateClick] = useState(false);
     const [inputShow, setInputShow] = useState("");
@@ -45,12 +55,22 @@ function CreateList() {
    }
 
    const handleCreateList = () => {
-        // TODO: create redux, record data
+        const listName = listInputEl.current.value;
+        handleAddList(listName);
+        listInputEl.current.value = '';
+        listInputEl.current.focus();
    }
  
 
     return(
         <>
+
+            {
+                list.map((item, key) => {
+                    return <ListBox key={key + item}>{item}</ListBox>
+                }) 
+            }
+
            {
                createClick ? 
                (
@@ -73,5 +93,19 @@ function CreateList() {
 
 }
 
+const stateToProps = state => {
+    return {   
+        list: state.list.list
+    }
+}
 
-export default CreateList;
+const dispatchToProps = dispatch => {
+    return {
+        handleAddList(listName) {
+            const action = addList(listName);
+            dispatch(action);
+        }
+    }
+}
+
+export default connect(stateToProps, dispatchToProps)(CreateList);

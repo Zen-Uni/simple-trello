@@ -9,14 +9,17 @@ export const Container = styled.div`
     background-position: center;
     background-repeat:no-repeat;
     background-size: cover;
-    overflow-y:hidden;
-    box-sizing: border-box;
+    overflow-y: hidden;
+    white-space: nowrap;
+    /* overflow-x: scroll;s */
+    /* box-sizing: border-box; */
     padding: 3vh 3vw;
 `;
 
 
 // create list box  .. unclick status
 export const CreateListBox = styled.div`
+    position: relative;
     height: 40px;
     width: 260px;
     background-color: rgba(10, 10, 10, .6);
@@ -28,6 +31,8 @@ export const CreateListBox = styled.div`
     line-height: 40px;
     padding: 0px 5px;
     transition: all .4s ease;
+    /* float: left; */
+    display: inline-block;
     &:hover {
         background-color: rgba(10, 10, 10, .8);
     }
@@ -45,7 +50,7 @@ export const CreateListInputBox = styled.div`
     transition: all .3s ease;
     box-sizing: border-box;
     padding: 2px 3px;
-
+    display: inline-block;
     &.show  {
         transform: scaleY(1);
     }
@@ -89,3 +94,20 @@ export const CreateListCancle = styled.div`
     text-align: center;
     line-height: 22.5px;
 `
+
+
+// list style
+export const ListBox = styled.div`
+    position: relative;
+    display: inline-block;
+    /* float: left; */
+    height: 100%;
+    width: 260px;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    line-height: 40px;
+    color: rgba(0, 0, 0, .8);
+    font-size: 17px;
+    margin: 0px 10px 0px 0px;
+`
+// TODO: fix list style
