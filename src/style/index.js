@@ -55,5 +55,37 @@ export const CreateListInput = styled.input`
     position: relative;
     height: 35px;
     width: 100%;
+    font-size: 17px;
+    box-sizing: border-box;
+    padding: 3px 5px;
 `
-// TODO: create button and cancle button
+
+export const CreateListButtonBox = styled.div`
+    position: relative;
+    height: 30px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1px 0px;
+`
+export const CreateListButton = styled.div`
+    position: relative;
+    height: 30px;
+    width: 100px;
+    background-color: #4fc08d;
+    border-radius: 1px;
+    color: white;
+    text-align: center;
+    line-height: 30px;
+    margin: 0px 3px 0px 0px;
+    cursor: pointer;
+    float: left;
+`
+export const CreateListCancle = styled.div`
+    float: left;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    font-size: 40px;
+    text-align: center;
+    line-height: 22.5px;
+`
