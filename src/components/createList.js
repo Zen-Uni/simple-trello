@@ -1,6 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
 
+// import ant-design components
+import {
+    message
+} from 'antd';
+
+
 // inject actions
 import {
     addList,
@@ -12,14 +18,16 @@ import {
     CreateListInput,
     CreateListButtonBox,
     CreateListButton,
-    CreateListCancle,
-    ListBox,
+    CreateListCancel,
 } from '../style/index';
+
+
+// import components
+import List from './list';
 
 function CreateList(props) {
 
     const { handleAddList, list } = props;
-    console.log(list);
 
     const [createClick, setCreateClick] = useState(false);
     const [inputShow, setInputShow] = useState("");
@@ -56,6 +64,7 @@ function CreateList(props) {
 
    const handleCreateList = () => {
         const listName = listInputEl.current.value;
+        if (!listName) return message.warning("请输入列表名字！");
         handleAddList(listName);
         listInputEl.current.value = '';
         listInputEl.current.focus();
@@ -67,7 +76,7 @@ function CreateList(props) {
 
             {
                 list.map((item, key) => {
-                    return <ListBox key={key + item}>{item}</ListBox>
+                    return <List key={key + item} name={item} />
                 }) 
             }
 
@@ -78,7 +87,7 @@ function CreateList(props) {
                         <CreateListInput ref={listInputEl}/>
                         <CreateListButtonBox >
                             <CreateListButton onClick={handleCreateList}>添加列表</CreateListButton>
-                            <CreateListCancle onClick={() => setCreateClick(false)}>×</CreateListCancle>
+                            <CreateListCancel onClick={() => setCreateClick(false)}>×</CreateListCancel>
                         </CreateListButtonBox>
                     </CreateListInputBox>
                ) : 

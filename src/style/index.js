@@ -1,6 +1,18 @@
 import styled from 'styled-components';
 import bgImg from '../static/img/bg.jpg';
 
+// import components style
+import {
+    ListTabBox,
+    ListTabConfigBox,
+    AddListItem,
+    AddListItemInput,
+    AddListItemButtonBox,
+    AddListItemButton,
+    AddListItemCancel,
+} from './listStyle';
+
+
 // container style
 export const Container = styled.div`
     height: 100vh;
@@ -33,6 +45,7 @@ export const CreateListBox = styled.div`
     transition: all .4s ease;
     /* float: left; */
     display: inline-block;
+    vertical-align:top
     &:hover {
         background-color: rgba(10, 10, 10, .8);
     }
@@ -85,7 +98,7 @@ export const CreateListButton = styled.div`
     cursor: pointer;
     float: left;
 `
-export const CreateListCancle = styled.div`
+export const CreateListCancel = styled.div`
     float: left;
     height: 30px;
     width: 30px;
@@ -100,14 +113,24 @@ export const CreateListCancle = styled.div`
 export const ListBox = styled.div`
     position: relative;
     display: inline-block;
-    /* float: left; */
-    height: 100%;
     width: 260px;
     border-radius: 5px;
-    background-color: whitesmoke;
-    line-height: 40px;
+    background-color: #eee;
     color: rgba(0, 0, 0, .8);
     font-size: 17px;
     margin: 0px 10px 0px 0px;
+    box-sizing: border-box;
+    padding: 0px 5px 5px 5px;
+    vertical-align: top;
 `
-// TODO: fix list style
+
+// export components style
+export {
+    ListTabBox,
+    ListTabConfigBox,
+    AddListItem,
+    AddListItemInput,
+    AddListItemButtonBox,
+    AddListItemButton,
+    AddListItemCancel,
+}
