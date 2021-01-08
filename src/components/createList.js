@@ -1,4 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { connect } from 'react-redux';
+
+// import ant-design components
+import {
+    message
+} from 'antd';
+
+
+// inject actions
+import {
+    addList,
+} from '../store/action'
 
 import {
     CreateListBox,
@@ -6,10 +18,16 @@ import {
     CreateListInput,
     CreateListButtonBox,
     CreateListButton,
-    CreateListCancle,
+    CreateListCancel,
 } from '../style/index';
 
-function CreateList() {
+
+// import components
+import List from './list';
+
+function CreateList(props) {
+
+    const { handleAddList, list } = props;
 
     const [createClick, setCreateClick] = useState(false);
     const [inputShow, setInputShow] = useState("");
@@ -45,12 +63,23 @@ function CreateList() {
    }
 
    const handleCreateList = () => {
-        // TODO: create redux, record data
+        const listName = listInputEl.current.value;
+        if (!listName) return message.warning("请输入列表名字！");
+        handleAddList(listName);
+        listInputEl.current.value = '';
+        listInputEl.current.focus();
    }
  
 
     return(
         <>
+
+            {
+                list.map((item, key) => {
+                    return <List key={key + item} name={item} />
+                }) 
+            }
+
            {
                createClick ? 
                (
@@ -58,7 +87,7 @@ function CreateList() {
                         <CreateListInput ref={listInputEl}/>
                         <CreateListButtonBox >
                             <CreateListButton onClick={handleCreateList}>添加列表</CreateListButton>
-                            <CreateListCancle onClick={() => setCreateClick(false)}>×</CreateListCancle>
+                            <CreateListCancel onClick={() => setCreateClick(false)}>×</CreateListCancel>
                         </CreateListButtonBox>
                     </CreateListInputBox>
                ) : 
@@ -73,5 +102,19 @@ function CreateList() {
 
 }
 
+const stateToProps = state => {
+    return {   
+        list: state.list.list
+    }
+}
 
-export default CreateList;
+const dispatchToProps = dispatch => {
+    return {
+        handleAddList(listName) {
+            const action = addList(listName);
+            dispatch(action);
+        }
+    }
+}
+
+export default connect(stateToProps, dispatchToProps)(CreateList);
